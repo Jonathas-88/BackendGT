@@ -30,3 +30,16 @@ model cartItem{
 
 }
 
+// Use a configuração timestamps: true do prisma para gerar as colunas created_at e updated_at
+
+model User {
+  id Int @id @default(autoincrement())
+  firstname String
+  surname String
+  email String @unique
+  password String
+  created_ad DateTime @default(now())
+  updated_ad DateTime @updatedAt
+  
+}
+
