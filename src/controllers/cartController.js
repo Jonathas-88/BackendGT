@@ -1,9 +1,10 @@
 const {criarCarrinhoService, listarCarrinhoService, limparCarrinhoService} = require('../services/cartService.js')
 
 async function listarItens(req, res) {
- const {id} = req.params
+    const user = req.user.id  
+    const {id} = req.params
   try {
-     const result = await listarCarrinhoService(id) 
+     const result = await listarCarrinhoService(id, user) 
     res.status(200).json(result.rows)
     } catch (error) {
         console.log("Erro ao listar itens do carrinho", error)
@@ -12,9 +13,9 @@ async function listarItens(req, res) {
  }
 
 async function criarCarrinho(req, res) {
-    const {user_id} = req.body 
+    const user = req.user.id 
     try {
-        await criarCarrinhoService(user_id)
+        await criarCarrinhoService(user)
         res.status(201).json({message: 'Carrinho criado com sucesso'})
     } catch (error) {
         console.log("Erro ao criar carrinho", error)
@@ -25,9 +26,10 @@ async function criarCarrinho(req, res) {
     }
 }
  async function deletarCarrinho(req, res) {
+    const user = req.user.id
      const {id} = req.params
     try {
-         await limparCarrinhoService(id)
+         await limparCarrinhoService(id, user)
          res.status(200).json({message: "Carrinho limpo"})
       } catch (error) {
          console.log("Erro ao limpar carrinho", error)
@@ -38,6 +40,6 @@ async function criarCarrinho(req, res) {
 
 module.exports = { 
     listarItens,
-    listarCarrinhoService,
-    limparCarrinhoService
+   criarCarrinho,
+   deletarCarrinho
 }

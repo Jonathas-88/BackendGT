@@ -19,6 +19,8 @@ model Cart {
   user_id Int
   created_at DateTime @default(now())
   itens cartItem[]
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
 }
 
 model cartItem{
@@ -40,6 +42,34 @@ model User {
   password String
   created_ad DateTime @default(now())
   updated_ad DateTime @updatedAt
-  
+  cart Cart[]
 }
 
+// O objetivo deste requisito é criar a tabela de opções do produto no banco de dados utilizando o Sequelize ORM.
+// A tabela deve conter as colunas a seguir:
+
+//model Product {
+//  id Int @id
+//  itens ProductOptions[]
+//}
+
+//model ProductOptions {
+//  id Int @id @default(autoincrement())
+// product_id Int // vem tabela produto
+//  title String
+// shape Role @default(square)
+//  radius Int @default(0) 
+//  type  OptionType @default(TEXT) 
+//  values String
+//  product Product @relation(fields: [product_id], references: [id], onDelete: Cascade)
+//}
+
+//enum Role {
+// square
+// circle
+//}
+
+//enum OptionType {
+//  TEXT
+//  COLOR
+//}

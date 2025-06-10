@@ -16,7 +16,7 @@ async function login(req, res) {
         const result = await loginUsuario(email, password)
         res.status(200).json(result)
     } catch (error) {
-        result.status(401).json({error: error.message})
+        res.status(401).json({error: error.message})
     }
 }
 
