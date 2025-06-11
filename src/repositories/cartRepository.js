@@ -8,8 +8,10 @@ async function cartCheck(cart_id) {
     })
 }
 
-async function listarCarrinhoRepository(cart_id, user) {
+async function listarCarrinhoRepository(cart_id, user, page, limit) {
     return prisma.cartItem.findMany({
+        skip: (page - 1) * limit,
+        take: limit,
         where: {
             cart: {
                 id: Number(cart_id),

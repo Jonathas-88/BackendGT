@@ -2,6 +2,7 @@ const {registrarUsuario, loginUsuario}= require('../services/userService.js')
 
 async function registrar(req, res) {
     const {firstname, surname, email, password} = req.body
+    console.log(firstname, surname, email, password)
     try {
         const user = await registrarUsuario(firstname, surname, email, password)
         res.status(201).json(user)
